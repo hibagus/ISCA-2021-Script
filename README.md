@@ -7,7 +7,8 @@
   <h3 align="center">ISCA 2021 Script</h3>
 
   <p align="center">
-    A collection of redistributable Python script to help organize ISCA 2021 (48th International Symposium on Computer Architecture).
+    A collection of redistributable Python script to help organize ISCA 2021 </br>
+    (The 48th International Symposium on Computer Architecture)
   </p>
 </p>
 
@@ -63,6 +64,8 @@
 
 
 ### Description
+This repository contains some Python scripts that we used to help us manage the ISCA 2021
+conference. 
 
 * []()
 * []()
@@ -75,29 +78,27 @@
 * []()
 
 ### Acknowledgements
-
-* []()
-* []()
-* []()
+We would like to thank the following persons that give us ideas during the development of these scripts.
+* Mario Drumond for PC Chair Kit (https://github.com/mdrumond/pc-chair-kit)
+* Emery Berger for ASPLOS-21 scripts (https://github.com/emeryberger/ASPLOS-2021)
+* Othneil Drew for README Template (https://github.com/othneildrew/Best-README-Template)
 
 ### License
 
-* []()
-* []()
-* []()
+These scripts are licensed under GNU General Public License v2.0. 
+Feel free to modify, use, and distribute these scripts. 
 
 ### Improvements
 
-* []()
-* []()
-* []()
 
 ### Contributing
+The scripts may not suite your needs and may also contain some bugs and imperfections.
+We encourage users to actively participating these scripts and add more features into them.
+Feel free to open a pull request should you want to add new features to the scripts or just do a little bug fixing.
+Every contribution will definitely be helpful for our communities and future conference. 
 
-* []()
-* []()
-* []()
-
+### Citing
+If they are useful for you and your works, we would be happy if you could cite us.
 
 <!-- GETTING STARTED -->
 ## Getting Started
