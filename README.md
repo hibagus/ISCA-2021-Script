@@ -40,7 +40,7 @@
       <a href="#conflict-of-interest-crosscheck">Conflict of Interest Crosscheck</a>
       <ul>
         <li><a href="#getting-dblp-person-id">Getting DBLP Person ID</a></li>
-        <li><a href="#getting-dblp-coauthors">Getting DBLP Co-Authors</a></li>
+        <li><a href="#getting-dblp-coauthors">Getting DBLP Coauthors</a></li>
         <li><a href="#merge-dblp-conflict-to-hotcrp">Merge DBLP Conflict to HotCRP</a></li>
       </ul>
     </li>
@@ -60,12 +60,6 @@
 
 <!-- INTRODUCTION -->
 ## Introduction
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
 
 
 ### Description
@@ -145,7 +139,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 * []()
 * []()
 
-### Getting DBLP Co-Authors
+### Getting DBLP Coauthors
 
 * []()
 * []()
