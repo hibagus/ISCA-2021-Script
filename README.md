@@ -27,12 +27,14 @@
         <li><a href="#license">License</a></li>
         <li><a href="#improvements">Improvements</a></li>
         <li><a href="#contributing">Contributing</a></li>
+        <li><a href="#citing">Citing</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#recommendation">Recommendation</a></li>
         <li><a href="#installation">Installation</a></li>
         <li><a href="#sample-data">Sample Data</a></li>
       </ul>
@@ -73,9 +75,10 @@ conference.
 
 ### Authors
 
-* []()
-* []()
-* []()
+* Bagus Hanindhito, PhD Student
+* Lizy Kurian John, PC Chair of ISCA 2021
+Laboratory for Computer Architecture, Department of Electrical and Computer Engineering </br>
+The University of Texas at Austin, Austin, The United States of America
 
 ### Acknowledgements
 We would like to thank the following persons that give us ideas during the development of these scripts.
@@ -103,15 +106,43 @@ If they are useful for you and your works, we would be happy if you could cite u
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+Please follow the steps below to obtain the scripts and run them locally at your own machine.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+The scripts are developed under Ubuntu 20.04.1 LTS running on Windows Subsystem Linux 2 (WSL2). </br>
+We use Python 3.6.12 64-bit with the following packages installed:
+* pandas: 1.1.4
+* numpy: 1.19.4
+* tqdm: 4.51.0
+* fuzzywuzzy: 0.18.0
+* urllib: 1.25.11
+* json5: 0.9.5
+* jsonschema: 3.2.0
+* Unidecode: 1.1.1
+* xmltodict: 0.12.0
+
+We recommend to use virtual environment (e.g., Anaconda) to install the required packages to avoid version conflict. Please use the following command to install the necessary packages.
+
   ```sh
   npm install npm@latest -g
   ```
+
+### Recommendation
+
+#### IDE/Editor
+
+#### Virtual Environment
+We recommend to use virtual environment (e.g., Anaconda) to install the required packages to avoid version conflict.
+
+#### CSV Editor
+We recommend to use CSV Editor that can support UTF-8 encoding to avoid any miss-interpreted characters. We use Microsoft Office Excel 2019 to edit CSV downloaded from HotCRP and to prepare CSV to be uploaded to HotCRP.
+
+1. Load CSV to Excel
+Please do not directly open the CSV file using Excel since it will be wrongly decoded. Open a blank Excel workbook and go to "Data" on the tab menu. Select "Get Data", "From File", "From Text/CSV". An open file dialog will appear to let you choose which CSV file you want to load. Then, data preview dialog will open as shown below. Please select "File Origin" as "65001: Unicode (UTF-8)" and "Delimiter" as "Comma". Finally, click "Load" to load the CSV into a worksheet. Now, you can manipulate the CSV data.
+
+2. Save CSV from Excel
+To save the data from Excel (xlsx) to CSV, please select "File", then "Save as". Select "Browse" to find the folder where you want to save the CSV into. Then, select "CSV UTF-8 (Comma delimited) (*.csv) on the "Save as type:" dropdown box. Finally, click "Save". 
 
 ### Installation
 
