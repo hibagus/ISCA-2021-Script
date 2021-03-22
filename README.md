@@ -255,7 +255,7 @@ This section is used to do a Conflict of Interest Crosscheck between the conflic
 
       Affiliation of PC member based on the DBLP
 
-  Please use Excel to inspect and modify the output CSV file. Follow the ``Recommendation`` above on how to import CSV into Excel with UTF-8 encoding and export CSV from Excel with UTF-8 encoding. 
+  Please use Excel to inspect and modify the output CSV file. Follow the <a href="#recommendation">Recommendation</a> above on how to import CSV into Excel with UTF-8 encoding and export CSV from Excel with UTF-8 encoding. 
 
 
 
