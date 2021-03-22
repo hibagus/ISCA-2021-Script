@@ -132,6 +132,18 @@ We recommend to use virtual environment (e.g., Anaconda) to install the required
 ### Recommendation
 
 #### IDE/Editor
+This file is compatible with Visual Studio Code with Python plugin (v2021.2.633441544) and Jupyter Extension (v2021.2.576440691) for Visual Studio Code. It is recommended to use Visual Studio Code with these plugins to run the script cell-by-cell (just like in Jupyter Notebook). This makes it easier to debug the script should there is any error. Visual Studio Code also has a reliable interface with Windows Subsystem Linux 2 which is very useful if you use Windows Subsystem Linux 2 as your development environment.
+
+![VSCode Compatible Feature](img/IDEVScode.png)
+
+1. Interface seamlessly with Windows Subsystem Linux 2.
+2. Integration with Git version control system.
+3. Integration with Conda virtual environment for Python.
+4. Interactive Shell.
+5. Text editor with syntax highlighting.
+6. Cell-based code execution.
+7. Interactive variable inspection.
+8. Interactive output shell.
 
 #### Virtual Environment
 We recommend to use virtual environment (e.g., Anaconda) to install the required packages to avoid version conflict.
@@ -151,7 +163,7 @@ We recommend to use CSV Editor that can support UTF-8 encoding to avoid any miss
 
     ![Export CSV From Excel](img/ExportCSV.png)
 
-    To save the data from Excel (.xlsx) to CSV, please select ``File`` (not shown, it should be located on the top left), then ``Save as`` (1). Select ``Browse`` (2) to find the folder where you want to save the CSV into. Then, select ``CSV UTF-8 (Comma delimited) (*.csv)`` on the ``Save as type:`` (3)dropdown box. Finally, click ``Save`` (4). This CSV file can now be uploaded into HotCRP or can be used as input to our Python scripts. 
+    To save the data from Excel (.xlsx) to CSV, please select ``File`` (not shown, it should be located on the top left), then ``Save as`` (1). Select ``Browse`` (2) to find the folder where you want to save the CSV into. Then, select ``CSV UTF-8 (Comma delimited) (*.csv)`` on the ``Save as type:`` (3) dropdown box. Finally, click ``Save`` (4). This CSV file can now be uploaded into HotCRP or can be used as input to our Python scripts. 
 
 ### Installation
 
