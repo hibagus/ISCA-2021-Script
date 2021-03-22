@@ -197,14 +197,16 @@ This section is used to do a Conflict of Interest Crosscheck between the conflic
 
 ### Getting DBLP Person ID
 * Script
+  
   Use script ``s01_pcname_to_dblp_person_id.py`` to accomplish this task.
 
 * Input
+  
   The input to this script is a CSV file contains the PC info from HotCRP. To obtain this CSV file, go to the ``Users`` on the side-panel of your HotCRP conference page which will bring you to the list of users registered. In the ``User Selection`` on the top, select ``Program committee`` and click ``Go`` which will display all PC members. Then, go to the bottom of the page, click ``select all xxx, then Download:`` and choose ``PC info``. Click ``Go`` to download the CSV file.
 
   The header of this CSV file is shown below.
   ```sh
-  first,last,email,affiliation,country,roles,tags,collaborators,follow,"topic: ...", "topic:...", ...
+  first,last,email,affiliation,country,roles,tags,collaborators,follow,"topic: ...","topic:...",...
   ```
 
 
