@@ -225,35 +225,35 @@ This section is used to do a Conflict of Interest Crosscheck between the conflic
 
     * ``isUnique`` 
     
-    Indicates that the entry for a particular PC member is unique (i.e., no homonym) if it has value of ``1``. If it is not unique, then you will need to manually select the correct entry for a particular PC member. We suggest that you check both unique and not unique entries if you have time.
+      Indicates that the entry for a particular PC member is unique (i.e., no homonym) if it has value of ``1``. If it is not unique, then you will need to manually select the correct entry for a particular PC member. We suggest that you check both unique and not unique entries if you have time.
 
     * ``isError``
 
-    Indicates that the script is unable to fetch the URL to the DBLP database. It may be because the person does not exist in DBLP database. You may need to manually check the entry that has ``isError`` value of ``1``.
+      Indicates that the script is unable to fetch the URL to the DBLP database. It may be because the person does not exist in DBLP database. You may need to manually check the entry that has ``isError`` value of ``1``.
 
     * ``entrynum``
 
-    Indicates the number of entry for a particular PC member. If there is no homonym, the entry number should only be ``0``. Anything larger than ``0`` indicates that there are some homonym for a particular PC member that need to be solved. 
+      Indicates the number of entry for a particular PC member. If there is no homonym, the entry number should only be ``0``. Anything larger than ``0`` indicates that there are some homonym for a particular PC member that need to be solved. 
 
     * ``name_confidence``
     
-    Indicates the fuzzymatch filtering confidence based on the first name and last name. The script tries to remove all non-relevant entries of homonym for each PC member. If the confidence level is lower than a predefined threshold, the entries will be removed, otherwise be kept. It is up to you to define the threshold; the higher the threshold, the less homonym entries will make through the output CSV file. We recommend to keep the threshold around 80 to 90. 
+      Indicates the fuzzymatch filtering confidence based on the first name and last name. The script tries to remove all non-relevant entries of homonym for each PC member. If the confidence level is lower than a predefined threshold, the entries will be removed, otherwise be kept. It is up to you to define the threshold; the higher the threshold, the less homonym entries will make through the output CSV file. We recommend to keep the threshold around 80 to 90. 
 
     * ``affl_confidence``
 
-    Indicates the fuzzymatch filtering confidence based on the affiliation. The script tries to remove all non-relevant entries of homonym for each PC member. If the confidence level is lower than a predefined threshold, the entries will be removed, otherwise be kept. It is up to you to define the threshold; the higher the threshold, the less homonym entries will make through the output CSV file. We recommend to keep the threshold around 80 to 90. 
+      Indicates the fuzzymatch filtering confidence based on the affiliation. The script tries to remove all non-relevant entries of homonym for each PC member. If the confidence level is lower than a predefined threshold, the entries will be removed, otherwise be kept. It is up to you to define the threshold; the higher the threshold, the less homonym entries will make through the output CSV file. We recommend to keep the threshold around 80 to 90. 
 
     * ``name_dblp``
 
-    Name of PC member based on the DBLP
+      Name of PC member based on the DBLP
 
     * ``url_dblp``
 
-    The URL to the DBLP database.
+      The URL to the DBLP database.
 
     * ``affiliation_dblp``
 
-    Affiliation of PC member based on the DBLP
+      Affiliation of PC member based on the DBLP
 
   Please use Excel to inspect and modify the output CSV file. Follow the ``Recommendation`` above on how to import CSV into Excel with UTF-8 encoding and export CSV from Excel with UTF-8 encoding. 
 
