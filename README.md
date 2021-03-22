@@ -140,8 +140,12 @@ We recommend to use virtual environment (e.g., Anaconda) to install the required
 We recommend to use CSV Editor that can support UTF-8 encoding to avoid any miss-interpreted characters. We use Microsoft Office Excel 2019 to edit CSV downloaded from HotCRP and to prepare CSV to be uploaded to HotCRP.
 
 1. Load CSV to Excel
+
     ![Load CSV To Excel](img/ImportCSV.png)
-    Please do not directly open the CSV file using Excel since it will be wrongly decoded. Open a blank Excel workbook and go to ``Data`` on the tab menu (1). Select ``Get Data`` (2), ``From File`` (3), ``From Text/CSV`` (4). An open file dialog will appear to let you choose which CSV file you want to load. Then, data preview dialog will open as shown below. Please select ``File Origin`` as ``65001: Unicode (UTF-8)`` (5) and ``Delimiter`` as ``Comma`` (6). Finally, click ``Load`` (7) to load the CSV into a worksheet. Now, you can manipulate the CSV data using Excel.
+
+    Please do not directly open the CSV file using Excel since it will be wrongly decoded. Open a blank Excel workbook and go to ``Data`` on the tab menu (1). Select ``Get Data`` (2), ``From File`` (3), ``From Text/CSV`` (4). An open file dialog will appear to let you choose which CSV file you want to load. 
+    
+    Then, data preview dialog will open as shown above. Please select ``File Origin`` as ``65001: Unicode (UTF-8)`` (5) and ``Delimiter`` as ``Comma`` (6). Finally, click ``Load`` (7) to load the CSV into a worksheet. Now, you can manipulate the CSV data using Excel.
 
 2. Save CSV from Excel
 
