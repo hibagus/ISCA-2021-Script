@@ -141,7 +141,7 @@ We recommend to use CSV Editor that can support UTF-8 encoding to avoid any miss
 
 1. Load CSV to Excel
 
-    ![Load CSV To Excel](img/ImportCSV.png)
+    ![Import CSV To Excel](img/ImportCSV.png)
 
     Please do not directly open the CSV file using Excel since it will be wrongly decoded. Open a blank Excel workbook and go to ``Data`` on the tab menu (1). Select ``Get Data`` (2), ``From File`` (3), ``From Text/CSV`` (4). An open file dialog will appear to let you choose which CSV file you want to load. 
     
@@ -149,7 +149,9 @@ We recommend to use CSV Editor that can support UTF-8 encoding to avoid any miss
 
 2. Save CSV from Excel
 
-    To save the data from Excel (.xlsx) to CSV, please select ``File``, then ``Save as``. Select ``Browse`` to find the folder where you want to save the CSV into. Then, select ``CSV UTF-8 (Comma delimited) (*.csv)`` on the ``Save as type:`` dropdown box. Finally, click ``Save``. This CSV file can now be uploaded into HotCRP or can be used as input to our Python scripts. 
+    ![Export CSV From Excel](img/ExportCSV.png)
+
+    To save the data from Excel (.xlsx) to CSV, please select ``File`` (not shown, it should be located on the top left), then ``Save as`` (1). Select ``Browse`` (2) to find the folder where you want to save the CSV into. Then, select ``CSV UTF-8 (Comma delimited) (*.csv)`` on the ``Save as type:`` (3)dropdown box. Finally, click ``Save`` (4). This CSV file can now be uploaded into HotCRP or can be used as input to our Python scripts. 
 
 ### Installation
 
