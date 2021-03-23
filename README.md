@@ -42,6 +42,7 @@
       <ul>
         <li><a href="#getting-dblp-person-id">Getting DBLP Person ID</a></li>
         <li><a href="#getting-dblp-coauthors">Getting DBLP Coauthors</a></li>
+        <li><a href="#dbpl-hotcrp-crosscheck">DBLP and HotCRP Crosscheck</a></li>
         <li><a href="#merge-dblp-conflict-to-hotcrp">Merge DBLP Conflict to HotCRP</a></li>
       </ul>
     </li>
@@ -203,6 +204,8 @@ We provide some sample CSV data inside the directory ``sample-data`` to make you
 This section is used to do a Conflict of Interest Crosscheck between the conflict list entered by each PC member in HotCRP and the list of co-authors from all of the publications of each PC member listed in DBLP. It consists of three steps as follows.
 
 ### Getting DBLP Person ID
+First, we need to get correct DBLP Person ID for each PC member. The DBLP Person ID is used to get the URL to DBLP database that contains all of the publications each PC member has. The publications will later be used to get the co-authors data and the publication year to construct the list of co-authors. Because of the homonym (i.e., multiple persons have same name), the output of the script may contain multiple DBLP Person ID for each PC member although the script has tried to do fuzzy match to filter unnecessary entries. You must manually check and inspect the output CSV file from this script before moving forward. Please use Excel to inspect and modify the output CSV file. Follow the <a href="#recommendation">Recommendation</a> above on how to import CSV into Excel with UTF-8 encoding and export CSV from Excel with UTF-8 encoding. 
+
 * Script
   
   Use script ``s01_pcname_to_dblp_person_id.py`` to accomplish this task.
@@ -255,29 +258,121 @@ This section is used to do a Conflict of Interest Crosscheck between the conflic
 
       Affiliation of PC member based on the DBLP
 
-  Please use Excel to inspect and modify the output CSV file. Follow the <a href="#recommendation">Recommendation</a> above on how to import CSV into Excel with UTF-8 encoding and export CSV from Excel with UTF-8 encoding. 
+Note: Please make sure that the result from this section is correct (i.e., the output CSV file). This file will be used repeatedly in the next section, and thus the correctness of the output CSV file is important. 
 
-
-
-
-
-First, we need to get correct DBLP Person ID for each PC member.
-
-* []()
-* []()
-* []()
+Note: If you update the input CSV file, you will need to re-run this section. 
 
 ### Getting DBLP Coauthors
+Next, we collect the co-authors list for each PC member. The co-authors' names are obtained from DBLP through the publication list of each PC member. Unlike previous section, this section require little to none manual work. Make sure that the output CSV file from previous section is correct before you proceed through this section. You also need to set the ``threshold_year`` inside the script to limit the range of years in which the publications' co-authors should be marked as conflict.
 
-* []()
-* []()
-* []()
+* Script
+  
+  Use script ``s02_pccoauthors_dblp_crawler.py`` to accomplish this task.
+
+* Input
+  
+  The input to this script is a CSV file from the previous section that contains the URL to DBLP Database. The header of this CSV file is shown below.
+  ```sh
+  full_name,first_name,last_name,affiliation,email,isUnique,isError,entrynum,name_confidence,affl_confidence,name_dblp,url_dblp,affiliation_dblp
+  ```
+
+* Output
+  
+  The script will output a CSV file that contains several fields as explained shortly. This output CSV file will be used for the next section. Normally, you don't need to do anything else manually at this section, providing that the input CSV file from previous section is correct.
+
+  ```sh
+  full_name,first_name,last_name,affiliation,email,name_dblp,url_dblp,affiliation_dblp,coauthors_name_dblp,coauthors_url_dblp
+  ```
+
+    * ``name_dblp``
+
+      Name of PC member based on the DBLP
+
+    * ``url_dblp``
+
+      The URL to the DBLP database.
+
+    * ``affiliation_dblp``
+
+      Affiliation of PC member based on the DBLP
+
+    * ``coauthors_name_dblp``
+
+      List of co-authors name based on the DBLP
+    
+    * ``coauthors_url_dblp``
+
+      List of co-authors URL to DBLP Database.
+
+### DBLP and HotCRP Crosscheck
+After that, we perform a crosscheck between the co-authors list obtained from DBLP and collaborators name obtained from HotCRP for each PC member. The script will do fuzzy match of the name to construct DBLP-only conflict list and HotCRP-only conflict list. The DBLP-only conflict list can be used to add missing conflict to each PC member in the next section. Meanwhile, the HotCRP-only conflict list is used to detect any wrongly-entered conflict by PC member. In our script, we only consider the DBLP-only conflict and add them to HotCRP in the next section. 
+
+* Script
+  
+  Use script ``s03_pcconflict_crosscheck`` to accomplish this task.
+
+* Input
+  
+  The input to this script is a CSV file from the previous section that contains the co-authors list for each PC member. The header of this CSV file is shown below.
+  ```sh
+  full_name,first_name,last_name,affiliation,email,name_dblp,url_dblp,affiliation_dblp,coauthors_name_dblp,coauthors_url_dblp
+  ```
+
+* Output
+  
+  The script will output a CSV file that contains the list of DBLP-only conflict and HotCRP-only conflict for each PC member.
+
+  ```sh
+  full_name,email,conflict_only_dblp_name,conflict_only_dblp_url,conflict_only_hotcrp
+  ```
+
+    * ``conflict_only_dblp_name``
+
+      The list of the name of person in conflict exist only in DBLP.
+
+    * ``conflict_only_dblp_url``
+
+      The list of the URL to DBLP Database of person in conflict exist only in DBLP.
+
+    * ``conflict_only_hotcrp``
+
+      The list of the name of person in conflict exist only in HotCRP.
 
 ### Merge DBLP Conflict to HotCRP
+Finally, we update the missing conflict in HotCRP based on the DBLP-only conflict obtained by DBLP-HotCRP crosschecking in previous section. The DBLP-only conflict, by default, does not have information about their affiliations. The script is able to fetch the affiliations for each DBLP-only conflict before merge them into HotCRP-compatible CSV, but this requires very long runtime since it needs to crawl the DBLP database for each DBLP-only conflict. If you don't wish to wait, you can use default affiliation ``None <DBLP>`` by performing slight modification to the script (see the script on line 48-55 for more information).
 
-* []()
-* []()
-* []()
+The output of this script is a CSV file that is ready to be uploaded to HotCRP. Please backup your HotCRP data and configuration before uploading the CSV. To upload the CSV file, go to the ``Users``, then click ``Create accounts``. From there, choose ``Bulk Update`` and choose the correct CSV file. Finally, clicj ``Save Accounts``. If successful, this will update the ``collaborators`` field of each PC member.
+
+* Script
+  
+  Use script ``s04_pcconflict_merge_hotcrp`` to accomplish this task.
+
+* Input
+  
+  There are two CSV files that are used as input to this script:
+  * The input to this script is a CSV file contains the PC info from HotCRP. 
+    This input must be the same file as the section <a href="#getting-dblp-person-id">Getting DBLP Person ID</a>. If you happens to change this CSV file, you need to start over from beginning.   
+
+    The header of this CSV file is shown below.
+    ```sh
+    first,last,email,affiliation,country,roles,tags,collaborators,follow,"topic: ...","topic: ...",...
+    ```
+  
+  * The output of previous section, which is a CSV file that contains the list of DBLP-only conflict and HotCRP-only conflict for each PC member.
+    
+    The header of this CSV file is shown below.
+    ```sh
+    full_name,email,conflict_only_dblp_name,conflict_only_dblp_url,conflict_only_hotcrp
+    ```
+    
+* Output
+  
+  The script will output an updated CSV file that is ready to be uploaded to HotCRP. 
+
+  The header of this CSV file is shown below.
+  ```sh
+  first,last,email,affiliation,country,roles,tags,collaborators,follow,"topic: ...","topic: ...",...
+  ```
 
 <!-- PAPER TOPIC ASSIGNMENT -->
 ## Paper Topic Assignment
@@ -326,3 +421,6 @@ fuzzywuzzy-0.18.0
 
 unidecode
 unidecode-1.2.0
+
+xmltodict
+xmltodict-0.12.0
