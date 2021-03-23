@@ -1,0 +1,35 @@
+topics,priority
+Acceleration for machine learning and artificial intelligence,22
+Accelerator-based and application-specific architectures,23
+Approximate computing,19
+Architectural support for programming languages and managed language runtimes,24
+Code Generation and Synthesis,13
+Compilers,7
+"Concurrency, Synnchronization",8
+"Data Center Systems and Architectures, Cloud computing",9
+Dependable Computing,10
+"Edge Computing, IoT",20
+"Embedded systems, Mobile systems",18
+"Emerging applications, Architectures for emerging applications",25
+"Emerging technologies (memories, circuits), Architectures with emerging technologies",14
+"Fault Tolerance, Reliability, Availability",11
+GPU architecture,17
+Heterogeneous architectures,30
+"HPC, Scientific Computing",12
+"Interconnection Networks, Networks on Chip",32
+"Machine Learning Systems, Deep learning, Neuromorphic computing",21
+"Memory Hierarchy, Caches,",31
+"Multicore computers, multiprocessor systems",2
+Non-traditional computing systems,16
+Operating Systems,5
+Parallel Processing,4
+"Performance evaluation, Benchmarking, simulation, and measurement methodologies",27
+"Power, energy, and thermal management",28
+"Processing in Memory, Near-data processing",29
+"Processor Design, Microarchitecture",34
+Quantum Computing,1
+Scheduling and Resource Management,6
+Security,15
+"Shared memory systems, cache coherence, consistency models",33
+Storage systems,26
+Virtualization,3

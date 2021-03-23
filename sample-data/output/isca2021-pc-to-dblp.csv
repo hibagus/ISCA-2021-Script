@@ -1,0 +1,4 @@
+full_name,first_name,last_name,affiliation,email,isUnique,isError,entrynum,name_confidence,affl_confidence,name_dblp,url_dblp,affiliation_dblp
+Aman Arora,Aman,Arora,University of Texas at Austin,aman.kbm@utexas.edu,1,0,0,0,0,Aman Arora,https://dblp.org/pid/75/912,[]
+Bagus Hanindhito,Bagus,Hanindhito,University of Texas at Austin,hanindhito@bagus.my.id,1,0,0,0,0,Bagus Hanindhito,https://dblp.org/pid/177/5432,[]
+Lizy John,Lizy,John,"ECE Dept, Univ. of Texas, Austin",ljohn@ece.utexas.edu,1,0,0,0,0,Lizy Kurian John,https://dblp.org/pid/j/LizyKurianJohn,"['University of Texas at Austin, USA']"

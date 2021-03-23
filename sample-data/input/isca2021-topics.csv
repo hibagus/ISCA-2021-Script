@@ -1,0 +1,28 @@
+paper,title,topic
+7,"Another Quantum Paper",Quantum Computing
+13,"Another GPU Interconnection Security Paper",GPU architecture
+13,"Another GPU Interconnection Security Paper","Interconnection Networks, Networks on Chip"
+13,"Another GPU Interconnection Security Paper",Security
+17,"Some Awesome Die-Stacked DRAM Paper","Emerging technologies (memories, circuits), Architectures with emerging technologies"
+17,"Some Awesome Die-Stacked DRAM Paper","Memory Hierarchy, Caches,"
+23,"Just Another Accelerator for Graph Mining",Accelerator-based and application-specific architectures
+23,"Just Another Accelerator for Graph Mining","Emerging applications, Architectures for emerging applications"
+23,"Just Another Accelerator for Graph Mining",Parallel Processing
+50,"Yet Another Machine Learning NLP Accelerator",Acceleration for machine learning and artificial intelligence
+50,"Yet Another Machine Learning NLP Accelerator",Accelerator-based and application-specific architectures
+50,"Yet Another Machine Learning NLP Accelerator","Emerging applications, Architectures for emerging applications"
+50,"Yet Another Machine Learning NLP Accelerator","Machine Learning Systems, Deep learning, Neuromorphic computing"
+50,"Yet Another Machine Learning NLP Accelerator",Scheduling and Resource Management
+77,"My Awesome Compression for Irregular Applications",Accelerator-based and application-specific architectures
+77,"My Awesome Compression for Irregular Applications","Memory Hierarchy, Caches,"
+77,"My Awesome Compression for Irregular Applications","Multicore computers, multiprocessor systems"
+77,"My Awesome Compression for Irregular Applications",Parallel Processing
+81,Some Idea on Cache-Coherent Mechanism for ICNs,"Data Center Systems and Architectures, Cloud computing"
+81,Some Idea on Cache-Coherent Mechanism for ICNs,"Emerging applications, Architectures for emerging applications"
+81,Some Idea on Cache-Coherent Mechanism for ICNs,"Emerging technologies (memories, circuits), Architectures with emerging technologies"
+81,Some Idea on Cache-Coherent Mechanism for ICNs,"Interconnection Networks, Networks on Chip"
+81,Some Idea on Cache-Coherent Mechanism for ICNs,"Shared memory systems, cache coherence, consistency models"
+86,"Let's talk about Locality Again!",Accelerator-based and application-specific architectures
+86,"Let's talk about Locality Again!","Machine Learning Systems, Deep learning, Neuromorphic computing"
+86,"Let's talk about Locality Again!","Memory Hierarchy, Caches,"
+86,"Let's talk about Locality Again!","Processing in Memory, Near-data processing"
