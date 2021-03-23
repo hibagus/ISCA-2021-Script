@@ -89,9 +89,11 @@ We use the email address registered with HotCRP to uniquelly identify each perso
 ### Scripts
 There are xx Python scripts provided in this repository.
 * 00_function.py
+
   This script contains all of the functions that will be called by other script. You don't need to run this script unless you need to debug its functionality.
 
 * 01_pcname_to_dblp_person_id.py
+
   This script is used to find DBLP person id based on the given first name and last name.
 
 
@@ -351,6 +353,7 @@ The output of this script is a CSV file that is ready to be uploaded to HotCRP. 
   
   There are two CSV files that are used as input to this script:
   * The input to this script is a CSV file contains the PC info from HotCRP. 
+
     This input must be the same file as the section <a href="#getting-dblp-person-id">Getting DBLP Person ID</a>. If you happens to change this CSV file, you need to start over from beginning.   
 
     The header of this CSV file is shown below.
@@ -376,9 +379,41 @@ The output of this script is a CSV file that is ready to be uploaded to HotCRP. 
 
 <!-- PAPER TOPIC ASSIGNMENT -->
 ## Paper Topic Assignment
+Each paper can fall into multiple topics since the authors can choose multiple topics that are appropriate for their paper. The PC members can also define their preference based on their expertise on what topics of the papers they want to review. This script helps to categorize the papers based on priority topic. The topic is prioritize based on the availability of reviewers with expertise on this topic. Usually, narrow topic has higher priority compared to more general topic. The script will output a single topic assigned for each paper. Based on this topic assignment, the papers are then tagged with distinctive tag on HotCRP as a guide to make it easier to assign reviewer to the papers. We use the HotCRP automatic assignment with some modification to help us assign reviewer to each paper. 
+
+* Input
+  
+  There are two CSV files that are used as input to this script:
+  * The CSV file that contains the list of papers with their selected topics. 
+
+    This file is obtained from HotCRP by clicking ``Search`` on the Search Field ``All`` in ``Submitted``. Then, move to the bottom of the page, click ``select all xxx`` and click ``Download``. Select ``Topics`` on ``Paper Information`` submenu, then click ``Go``.
+
+    The header of this CSV file is shown below.
+    ```sh
+    paper,title,topic
+    ```
+  
+  * The CSV file that contains predefined topic priority.
+    
+    This file is created manually. It contains all of the topics used in the conference and its numerical priority. The lower the number, the higher the priority is. See the ``sample-data/input/isca2021-topics-priority.csv`` for more information. Note that the topic must be match with the topic defined in HotCRP.
+
+    The header of this CSV file is shown below.
+    ```sh
+    topics,priority
+    ```
+    
+* Output
+  
+  The script will output an updated CSV file that is ready to be uploaded to HotCRP. 
+
+  The header of this CSV file is shown below.
+  ```sh
+  first,last,email,affiliation,country,roles,tags,collaborators,follow,"topic: ...","topic: ...",...
+  ```
 
 <!-- PAPER DISCUSSION SCHEDULER -->
 ## Paper Discussion Scheduler
+
 
 <!-- ZOOM MEETING CONFIG GENERATOR -->
 ## Zoom Meeting Config Generator
