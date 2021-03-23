@@ -1,6 +1,5 @@
 # ISCA-2021-Script
 
-
 <br />
 <p align="center">
 
@@ -87,15 +86,38 @@ Our conference uses HotCRP to manage the submission, and thus our scripts are cr
 We use the email address registered with HotCRP to uniquelly identify each person. Therefore, it is recommended that you collect the HotCRP email address everytime you create a form to collect information outside HotCRP (e..g, meeting availability, zoom email address, etc.).
 
 ### Scripts
-There are xx Python scripts provided in this repository.
-* 00_function.py
+There are 8 Python scripts provided in this repository.
+* s00_function.py
 
   This script contains all of the functions that will be called by other script. You don't need to run this script unless you need to debug its functionality.
 
-* 01_pcname_to_dblp_person_id.py
+* s01_pcname_to_dblp_person_id.py
 
   This script is used to find DBLP person id based on the given first name and last name.
 
+* s02_pccoauthors_dblp_crawler.py
+
+  This script is used to find all of the co-authors for each PC member based on publications listed in DBLP.
+
+* s03_pcconflict_crosscheck.py
+
+  This script is used to crosscheck the co-authors from DBLP with the collaborators entered in HotCRP for each PC member.
+
+* s04_pcconflict_merge_hotcrp.py
+
+  This script is used to update missing collaborators from DBLP to HotCRP.
+
+* s05_paper_topic_assign.py
+
+  This script is used to assign paper topic based on topic priority.
+
+* s06_paper_discussion_window.py
+
+  This script is used generate paper discussion schedule used in PC meeting.
+
+* s07_zoom_meeting_generator.py
+
+  This script is used to generate Zoom Breakout Room Configuration used in PC meeting.
 
 ### Authors
 
@@ -134,15 +156,33 @@ Please follow the steps below to obtain the scripts and run them locally at your
 
 The scripts are developed under Ubuntu 20.04.1 LTS running on Windows Subsystem Linux 2 (WSL2). </br>
 We use Python 3.6.12 64-bit with the following packages installed:
-* pandas: 1.1.4
-* numpy: 1.19.4
-* tqdm: 4.51.0
-* fuzzywuzzy: 0.18.0
-* urllib: 1.25.11
-* json5: 0.9.5
-* jsonschema: 3.2.0
-* Unidecode: 1.1.1
-* xmltodict: 0.12.0
+* ipython_genutils==0.2  
+* ipython==7.16.1        
+* pexpect==4.8.0         
+* decorator==4.4.2       
+* pyzmq==20.0.0          
+* traitlets==4.3.3       
+* jupyter_client==6.1.7  
+* zeromq==4.3.4          
+* parso==0.8.1           
+* jupyter_core==4.7.1    
+* prompt-toolkit==3.0.1  
+* pickleshare==0.7.5     
+* tornado==6.1           
+* backcall==0.2.0        
+* ipykernel==5.3.4       
+* pygments==2.8.1        
+* six==1.15.0            
+* python-dateutil==2.8.1  
+* jedi==0.17.0           
+* ptyprocess==0.7.0     
+* numpy==1.19.5 
+* pandas==1.1.5 
+* pytz==2021.1
+* tqdm==4.59.0
+* fuzzywuzzy==0.18.0
+* unidecod==1.2.0
+* xmltodict==0.12.0
 
 ### Recommendation
 
@@ -311,7 +351,7 @@ After that, we perform a crosscheck between the co-authors list obtained from DB
 
 * Script
   
-  Use script ``s03_pcconflict_crosscheck`` to accomplish this task.
+  Use script ``s03_pcconflict_crosscheck.py`` to accomplish this task.
 
 * Input
   
@@ -347,7 +387,7 @@ The output of this script is a CSV file that is ready to be uploaded to HotCRP. 
 
 * Script
   
-  Use script ``s04_pcconflict_merge_hotcrp`` to accomplish this task.
+  Use script ``s04_pcconflict_merge_hotcrp.py`` to accomplish this task.
 
 * Input
   
@@ -381,6 +421,10 @@ The output of this script is a CSV file that is ready to be uploaded to HotCRP. 
 ## Paper Topic Assignment
 Each paper can fall into multiple topics since the authors can choose multiple topics that are appropriate for their paper. The PC members can also define their preference based on their expertise on what topics of the papers they want to review. This script helps to categorize the papers based on priority topic. The topic is prioritize based on the availability of reviewers with expertise on this topic. Usually, narrow topic has higher priority compared to more general topic. The script will output a single topic assigned for each paper. Based on this topic assignment, the papers are then tagged with distinctive tag on HotCRP as a guide to make it easier to assign reviewer to the papers. We use the HotCRP automatic assignment with some modification to help us assign reviewer to each paper. 
 
+* Script
+  
+  Use script ``s05_paper_topic_assign.py`` to accomplish this task.
+
 * Input
   
   There are two CSV files that are used as input to this script:
@@ -413,49 +457,150 @@ Each paper can fall into multiple topics since the authors can choose multiple t
 
 <!-- PAPER DISCUSSION SCHEDULER -->
 ## Paper Discussion Scheduler
+We collect the availability of PC member to attend the PC meeting using Doodle. We have two discussion days which divided into 1-hour slot to let each PC member choose which time slots they are available. Alternatively, you can also use Google Form to collect this data. Don't forget to collect the email used in HotCRP to make us easier to post-process the data.
 
+![Doodle Time Slots](img/DoodleSlots.png)
+
+The script will generate discussion schedule for each paper based on this priority.
+
+* The availability of PC reviewer; the more PC reviewer available, the more likely the paper will be scheduled.
+* The similarity of PC reviewer with previous scheduled paper; this to make Zoom Room Switching more seamless.
+* The similarity of PC member in conflict with previous scheduled paper; this to make Zoom Room Switching more seamless.
+
+The script is not perfect; it may schedule more paper at a time window, especially when the paper has very difficult time window in which all PC reviewer can attend. You may need to adjust the schedule by yourself; at least you have something to start with. You may need to adjust parameter ``target_paper_per_timeslot`` for load-balancing between timeslot. Try to reduce or increase the target to get the best scheduling for you. 
+
+* Script
+  
+  Use script ``s06_paper_discussion_window.py`` to accomplish this task.
+
+* Input
+  There are five CSV files that are used as input to this script. Because of the complicated data, at this point, we do not provide sample data for this script.
+
+  * The CSV file that contains the list papers alongside of their authors. 
+
+    This file is obtained from HotCRP by clicking ``Search`` on the Search Field ``All`` in ``Submitted``. Then, move to the bottom of the page, click ``select all xxx`` and click ``Download``. Select ``Authors`` on ``Paper Information`` submenu, then click ``Go``.
+
+    The header of this CSV file is shown below.
+    ```sh
+    paper,title,first,last,email,affiliation,country,iscontact
+    ```
+
+  * The CSV file that contains the list papers alongside with its data. 
+
+    This file is obtained from HotCRP by clicking ``Search`` on the Search Field ``All`` in ``Submitted``. Then, move to the bottom of the page, click ``select all xxx`` and click ``Download``. Select ``CSV`` on ``Paper Information`` submenu, then click ``Go``.
+
+    The header of this CSV file is shown below.
+    ```sh
+    ID,Title,Authors,"# Reviews",Status,OveMer,Tags
+    ```
+
+  * The CSV file that contains the list papers alongside with its PC conflict. 
+
+    This file is obtained from HotCRP by clicking ``Search`` on the Search Field ``All`` in ``Submitted``. Then, move to the bottom of the page, click ``select all xxx`` and click ``Download``. Select ``PC Conflict`` on ``Paper Information`` submenu, then click ``Go``.
+
+    The header of this CSV file is shown below.
+    ```sh
+    paper,title,first,last,email,conflicttype
+    ```
+
+  * The CSV file that contains the list papers alongside with its PC Reviewer Assignment. 
+
+    This file is obtained from HotCRP by clicking ``Search`` on the Search Field ``All`` in ``Submitted``. Then, move to the bottom of the page, click ``select all xxx`` and click ``Download``. Select ``PC assignments`` on ``Review assignments`` submenu, then click ``Go``.
+
+    The header of this CSV file is shown below.
+    ```sh
+    paper,action,email,round,title
+    ```
+
+  * The CSV file that contains the PC availability for each time slots.
+    
+    This file is created manually from Doodle by exporting the doodle data to Microsoft Excel. The numbered columns are the time slot defined in the Doodle. 
+
+    The header of this CSV file is shown below.
+    ```sh
+    hotcrp_name,doodle_name,hotcrp_email,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,
+    ```
+
+* Output
+  
+  The script will output a schedule for paper discussion. Each column represents the time slot defined in the Doodle. It will output a tuple ``[a, b]`` where ``a`` is the paper number and ``b`` is the scheduling indicator. The scheduling indicator equal to ``0`` means that all PC reviewer can attend on that section. The more negative the number, the less likely all PC reviewers can attend the paper discussion. Currently, the script will aggressively schedule all paper to achieve ``0`` scheduling indicator. 
+
+  The header of this CSV file is shown below.
+  ```sh
+  1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+  ```
 
 <!-- ZOOM MEETING CONFIG GENERATOR -->
 ## Zoom Meeting Config Generator
+Finally, we want to also create Zoom meeting breakout room pre-assigned configuration. You will need to collect email used by each PC member to login into the zoom account since the pre-assigned configuration will identify each participant based on this email. We use Google Form to collect one primary zoom email and one secondary zoom email (optional) alongside the full name and email address used in HotCRP. The generated CSV is located in folder ``sample-data/output/zoom`` and named based on the paper number. It can be uploaded to the Zoom Web Configuration by following the <a href="zoom-room-management.pdf">PDF</a> for the instructions. 
+
+There are three rooms configured on Zoom: main room, conflict room, and discussion room. The main room is where all participants first come after admitted to the meeting from waiting room. As the discussion progresses, the conflict room and discussion room are created dynamically, based on which paper is being discussed. All of PC members that are in conflict with the paper will be moved automatically to conflict room while the rest will join the discussion in discussion room. If there is PC members who get admitted to the meeting after the breakout room created, they will stay in main room until the room management move them manually based on the conflict list. 
+
+* Script
+  
+  Use script ``s07_zoom_meeting_generator.py`` to accomplish this task.
+
+* Input
+  
+  There are five CSV files that are used as input to this script. Because of the complicated data, at this point, we do not provide sample data for this script.
+
+  * The CSV file that contains the list papers alongside of their authors. 
+
+    This file is obtained from HotCRP by clicking ``Search`` on the Search Field ``All`` in ``Submitted``. Then, move to the bottom of the page, click ``select all xxx`` and click ``Download``. Select ``Authors`` on ``Paper Information`` submenu, then click ``Go``.
+
+    The header of this CSV file is shown below.
+    ```sh
+    paper,title,first,last,email,affiliation,country,iscontact
+    ```
+
+  * The CSV file that contains the list papers alongside with its data. 
+
+    This file is obtained from HotCRP by clicking ``Search`` on the Search Field ``All`` in ``Submitted``. Then, move to the bottom of the page, click ``select all xxx`` and click ``Download``. Select ``CSV`` on ``Paper Information`` submenu, then click ``Go``.
+
+    The header of this CSV file is shown below.
+    ```sh
+    ID,Title,Authors,"# Reviews",Status,OveMer,Tags
+    ```
+
+  * The CSV file that contains the list papers alongside with its PC conflict. 
+
+    This file is obtained from HotCRP by clicking ``Search`` on the Search Field ``All`` in ``Submitted``. Then, move to the bottom of the page, click ``select all xxx`` and click ``Download``. Select ``PC Conflict`` on ``Paper Information`` submenu, then click ``Go``.
+
+    The header of this CSV file is shown below.
+    ```sh
+    paper,title,first,last,email,conflicttype
+    ```
+
+  * The CSV file that contains the list of DBLP-only conflict and HotCRP-only conflict for each PC member.
+    
+    The header of this CSV file is shown below.
+    ```sh
+    full_name,email,conflict_only_dblp_name,conflict_only_dblp_url,conflict_only_hotcrp
+    ```
+    
+    This file is obtained from <a href="#dbpl-hotcrp-crosscheck">DBLP and HotCRP Crosscheck</a> section.
 
 
+  * The CSV file that contains the PC members zoom email.
+    
+    This file is created manually from Google Form to collect the email address used to login into Zoom Client for each PC member.
 
-Downloading and Extracting Packages
-VScode Integration
-ipython_genutils-0.2 | 27 KB     |  | 100% 
-ipython-7.16.1       | 999 KB    |  | 100% 
-pexpect-4.8.0        | 53 KB     |  | 100% 
-decorator-4.4.2      | 12 KB     |  | 100% 
-pyzmq-20.0.0         | 438 KB    |  | 100% 
-traitlets-4.3.3      | 140 KB    |  | 100% 
-jupyter_client-6.1.7 | 77 KB     |  | 100% 
-zeromq-4.3.4         | 331 KB    |  | 100% 
-parso-0.8.1          | 69 KB     |  | 100% 
-jupyter_core-4.7.1   | 68 KB     |  | 100% 
-prompt-toolkit-3.0.1 | 256 KB    |  | 100% 
-pickleshare-0.7.5    | 13 KB     |  | 100% 
-tornado-6.1          | 581 KB    |  | 100% 
-backcall-0.2.0       | 13 KB     |  | 100% 
-ipykernel-5.3.4      | 181 KB    |  | 100% 
-pygments-2.8.1       | 703 KB    |  | 100% 
-six-1.15.0           | 27 KB     |  | 100% 
-python-dateutil-2.8. | 221 KB    |  | 100% 
-jedi-0.17.0          | 780 KB    |  | 100% 
-ptyprocess-0.7.0     | 17 KB     |  | 100
+    The header of this CSV file is shown below.
+    ```sh
+    Name,Institution,email,hotcrp_email,Zoom email 1,Zoom email 2
+    ```
 
-Pandas
-numpy-1.19.5 
-pandas-1.1.5 
-pytz-2021.1
+* Output
+  The script outputs some files organized in four folder.
 
-tqdm
-tqdm-4.59.0
+  * zoom and zoom_hashed
 
-fuzzywuzzy
-fuzzywuzzy-0.18.0
+    This contains the CSV files to upload to the Zoom Web Configuration for break-out room pre-assignment. In the unhashed version, the CSV file has the name equal to the paper number while in hashed version, the paper number is hashed. 
+  
+  * conflict and conflict_hashed
 
-unidecode
-unidecode-1.2.0
+    This contains text files that explicitly says which PC members are in conflict with each paper. In the unhashed version, the text file has the name equal to the paper number while in hashed version, the paper number is hashed. This file is useful if you need to move zoom meeting participants manually, in case they join the meeting late (e.g., after breakout room has been created).
 
-xmltodict
-xmltodict-0.12.0
+  * Paper Summary
+
+    A csv file contains the summary of the paper.
